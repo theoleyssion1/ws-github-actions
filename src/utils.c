@@ -22,7 +22,7 @@ int trim_numbers(char *str, bool is_string_odd)
     for (int i = 0; i < size; i++)
         if (str[i] >= '0' && str[i] <= '9')
             str[i] = 'a' + (str[i] - '0');
-    return EPITECH_OK;
+    return EPITECH_OK;      
 }
 
 int my_strlen(char *str)
