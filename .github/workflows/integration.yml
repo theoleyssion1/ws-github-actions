@@ -21,7 +21,7 @@ jobs:
 
             - name: Report Banana result
               run: |
-                NB_ERROR=$(cat coding-style-report.log | wc -1)
+                NB_ERROR=$(cat coding-style-report.log | wc -l)
                 if [ $NB_ERROR -gt 0]; then
                     ERROR=$(cat coding-style-report.log)
                     echo "::error title=$NB_ERROR errors
