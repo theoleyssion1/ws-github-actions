@@ -11,17 +11,16 @@ jobs:
         container:
           image: ghcr.io/epitech/coding-style-checker:latest
         steps:
-    # Fetch the repository content
+    
             - name: Checkout GH repository
-             uses: actions/checkout@master
+              uses: actions/checkout@master
 
-    # Run the banana script
-              - name: Run coding-style.sh
-                run: check.sh $(pwd) $(pwd)
+   
+            - name: Run coding-style.sh           
+              run: check.sh $(pwd) $(pwd)
 
-    # Return an error if the banana report file is not empty
-              - name: Report banana result
-                run: |
+            - name: Report banana result
+              run: |
                 NB_ERROR=$(cat coding-style-reports.log | wc -l)
                 if [ $NB_ERROR -gt 0 ]; then
                 ERROR=$(cat coding-style-reports.log)
