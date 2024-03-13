@@ -10,7 +10,7 @@ jobs:
         name: Run Banana
         runs-on: ubuntu-latest
         container:
-            image: ghrc.oi/epitech/
+            image: ghrc.io/epitech/
             coding-style-checker:latest
 
         steps:
