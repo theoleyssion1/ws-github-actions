@@ -6,29 +6,30 @@ on:
     pull_request:
         branches-ignore: [ga-ignore-*]
 jobs:
-    coding-style:
-        name: Run Banana
-        runs-on: ubuntu-latest
-        container:
-            image: ghcr.io/epitech/coding-style-checker:latest
+  coding-style:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+    # Fetch the repository content
+      - name: Checkout GH repository
+        uses: actions/checkout@master
 
-        steps:
-            - name: Checkout GH repo
-              uses: actions/checkout@master
+    # Run the banana script
+      - name: Run coding-style.sh
+        run: check.sh $(pwd) $(pwd)
 
-            - name: Run coing-style checker
-              run: check.sh $(pwd) $(pwd)
+    # Return an error if the banana report file is not empty
+      - name: Report banana result
+        run: |
+          NB_ERROR=$(cat coding-style-reports.log | wc -l)
+          if [ $NB_ERROR -gt 0 ]; then
+            ERROR=$(cat coding-style-reports.log)
+            echo "::error title=$NB_ERROR errors found::$ERROR"
+            exit 1
+          fi
+          exit 0
 
-            - name: Report Banana result
-              run: |
-                NB_ERROR=$(cat coding-style-report.log | wc -l)
-                if [ $NB_ERROR -gt 0]; then
-                    ERROR=$(cat coding-style-report.log)
-                    echo "::error title=$NB_ERROR errors
-                    found::$ERROR"
-                    exit 1
-                fi
-                exit 0
     compile:
         runs-on: ubuntu-latest
         steps:
