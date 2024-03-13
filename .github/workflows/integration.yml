@@ -26,7 +26,7 @@ jobs:
                     ERROR=$(cat coding-style-report.log)
                     echo "::error title=$NB_ERROR errors
                     found::$ERROR"
-                exit 1
+                    exit 1
                 fi
                 exit 0
     compile:
@@ -47,3 +47,21 @@ jobs:
                     exit 1
                 fi
                 exit 0
+    
+    run-tests:
+        runs-on: ubuntu-latest
+
+        name: Run Unit & Integration Tests
+        container: epitechcontent/epitest-docker:latest
+        needs: [compile, coding-style]
+
+        steps:
+
+            - name: Checkout GH repo
+              uses: actions/checkout@v4
+
+            - name: Compile tests binaries
+              run: make compile_tests
+
+            - name: Check integration test
+              run: ./integration_testing
