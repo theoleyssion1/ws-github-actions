@@ -3,7 +3,7 @@ name: continious-integration
 on:
     push:
         branches-ignore: [ga-ignore-*]
-    pull-request:
+    pull_request:
         branches-ignore: [ga-ignore-*]
 jobs:
     coding-style:
